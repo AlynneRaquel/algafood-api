@@ -12,7 +12,7 @@ import com.algaworks.algafood.di.notificacao.TipoDoNotificador;
 @Component
 public class AtivacaoClienteService {
 	
-	@TipoDoNotificador (NivelUrgencia.URGENTE)
+	@TipoDoNotificador (NivelUrgencia.SEM_URGENCIA)
 	@Autowired//ponto de injeção 3 //(required = false)indica que é opcional ter uma dependência 
 	private Notificador notificador;
 	
