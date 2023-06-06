@@ -1,5 +1,7 @@
 package com.algaworks.algafood.di.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,9 +10,17 @@ import com.algaworks.algafood.di.notificacao.Notificador;
 
 @Component
 public class AtivacaoClienteService {
-
-	@Autowired //ponto de injeção 3
-	private Notificador notificador;
+	 
+	@Autowired//ponto de injeção 3 //(required = false)indica que é opcional ter uma dependência 
+	private List<Notificador> notificadores;
+	
+	public void ativar(Cliente cliente) {
+		cliente.ativar();
+		
+		for(Notificador notificador : notificadores) {
+		notificador.notificar(cliente, "Seu cadastro está ativo!");
+		}
+	}
 	
 	/*
 	 * @Autowired //ponto de injeção 1
@@ -22,13 +32,6 @@ public class AtivacaoClienteService {
 	 * public AtivacaoClienteService(String qualquer) { 
 	 * }
 	 */
-	
-
-	public void ativar(Cliente cliente) {
-		cliente.ativar();
-		
-		this.notificador.notificar(cliente, "Seu cadastro está ativo!");
-	}
 	
 	/*
 	 * @Autowired //outra forma de injetar 2
