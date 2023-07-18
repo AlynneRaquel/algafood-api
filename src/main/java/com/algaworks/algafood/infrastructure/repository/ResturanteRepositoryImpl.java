@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
@@ -24,20 +25,19 @@ public class ResturanteRepositoryImpl implements RestauranteRepository {
 
 	@Override
 	public Restaurante porId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return manager.find(Restaurante.class, id);
 	}
 
+	@Transactional
 	@Override
 	public Restaurante adicionar(Restaurante restaurante) {
-		// TODO Auto-generated method stub
-		return null;
+		return manager.merge(restaurante);
 	}
 
 	@Override
 	public void remover(Restaurante restaurante) {
-		// TODO Auto-generated method stub
-		
+		restaurante = porId(restaurante.getId());
+		manager.remove(restaurante);
 	}
 
 }
