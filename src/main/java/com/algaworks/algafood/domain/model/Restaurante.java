@@ -63,7 +63,7 @@ public class Restaurante {
 	private LocalDateTime dataAtualizacao;
 	
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER) //Pode gerar problemas
+	@ManyToMany //(fetch = FetchType.EAGER) //Pode gerar problemas
 	@JoinTable(name = "restaurante_forma_pagamento",
 			joinColumns = @JoinColumn(name = "restaurante_id"), //usar sempre o nome da tabela que recebe o mapeamento
 			inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id")) // Outra tabela do relacionamento
