@@ -1,5 +1,10 @@
 set foreign_key_checks = 0;
 
+lock tables cidade, cozinha, estado, 
+	forma_pagamento, grupo, grupo_permissao,
+	permissao, produto, restaurante, restaurante_forma_pagamento,
+	usuario, usuario_grupo;
+
 delete from cidade;
 delete from cozinha;
 delete from estado;
@@ -70,3 +75,5 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('T-B
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Sanduíche X-Tudo', 'Sandubão com muito queijo, hamburger bovino, bacon, ovo, salada e maionese', 19, 1, 5);
 
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Espetinho de Cupim', 'Acompanha farinha, mandioca e vinagrete', 8, 1, 6);
+
+unlock tables;
