@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -36,9 +38,11 @@ public class Restaurante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	@Column(nullable = false) // NULLABLE é detalhe da tabela do banco , não influencia no beanValidation
 	private String nome;
 	
+	@DecimalMin("1")
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
