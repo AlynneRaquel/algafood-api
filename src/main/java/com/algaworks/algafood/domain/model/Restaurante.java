@@ -20,10 +20,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.algaworks.algafood.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -40,18 +42,17 @@ public class Restaurante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-//	@NotNull
-//	@NotEmpty
-	@NotBlank
+	@NotBlank(groups = Groups.CadastroRestaurantes.class) //Grupos que vai validar a anotação
 	@Column(nullable = false) // NULLABLE é detalhe da tabela do banco , não influencia no beanValidation
 	private String nome;
 	
-	@DecimalMin("1")
+//	@DecimalMin("1")
+	@PositiveOrZero (groups = Groups.CadastroRestaurantes.class)
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
 	@Valid //Validando as propriedades de Cozinha
-	@NotNull
+	@NotNull (groups = Groups.CadastroRestaurantes.class)
 	@JsonIgnoreProperties("hibernateLazyInitializer")//@JsonIgnore
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
