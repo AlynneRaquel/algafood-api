@@ -16,7 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,7 +40,9 @@ public class Restaurante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+//	@NotNull
+//	@NotEmpty
+	@NotBlank
 	@Column(nullable = false) // NULLABLE é detalhe da tabela do banco , não influencia no beanValidation
 	private String nome;
 	
@@ -46,8 +50,9 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
-	//@JsonIgnore
-	@JsonIgnoreProperties("hibernateLazyInitializer")
+	@Valid //Validando as propriedades de Cozinha
+	@NotNull
+	@JsonIgnoreProperties("hibernateLazyInitializer")//@JsonIgnore
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
