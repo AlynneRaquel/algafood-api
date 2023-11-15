@@ -53,7 +53,7 @@ public class RestauranteController {
 	}
 
 	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED) //@validated (valida o grupo)
+	@ResponseStatus(HttpStatus.CREATED) 
 	public Restaurante adicionar (
 			@RequestBody @Valid Restaurante restaurante) {
 		 try {
@@ -65,7 +65,7 @@ public class RestauranteController {
 
 	@PutMapping("/{restauranteId}")
 	public Restaurante atualizar(@PathVariable Long restauranteId, 
-			@RequestBody Restaurante restaurante) {
+			@RequestBody @Valid Restaurante restaurante) {
 		Restaurante restauranteAtual = cadastroRestaurante.buscarOuFalhar(restauranteId);
 		BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formaPagamento", "endereço","dataCadastro");
 
