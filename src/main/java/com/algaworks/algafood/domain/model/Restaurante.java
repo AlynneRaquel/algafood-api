@@ -47,6 +47,7 @@ public class Restaurante {
 	@Column(nullable = false) // NULLABLE é detalhe da tabela do banco , não influencia no beanValidation
 	private String nome;
 	
+	@NotNull
 	@PositiveOrZero 
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
