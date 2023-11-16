@@ -48,7 +48,7 @@ public class Restaurante {
 	private String nome;
 	
 	@NotNull
-	@PositiveOrZero 
+	@PositiveOrZero(message = "{TaxaFrete.invalida}")// mensagem especifica do ValidationMessages 
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
