@@ -17,9 +17,9 @@ import javax.validation.Payload;
 import com.algaworks.algafood.api.exceptionhandler.MultiploValidator;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
-@Retention(RUNTIME)@Constraint(validatedBy = {MultiploValidator.class })
+@Retention(RUNTIME)
+@Constraint(validatedBy = {MultiploValidator.class })
 public @interface Multiplo {
-	
 	
 	String message() default "Multiplo Inválido";
 
