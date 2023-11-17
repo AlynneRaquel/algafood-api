@@ -12,21 +12,21 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
-import javax.validation.OverridesAttribute;
 import javax.validation.Payload;
-import javax.validation.constraints.PositiveOrZero;
+
+import com.algaworks.algafood.api.exceptionhandler.MultiploValidator;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
-@Retention(RUNTIME)
-@Constraint(validatedBy = { })
-@PositiveOrZero
-public @interface TaxaFrete {
-
-	@OverridesAttribute(constraint = PositiveOrZero.class, name = "message")//substitue a constraint padrão
-	String message() default "{TaxaFrete.invalida}";
+@Retention(RUNTIME)@Constraint(validatedBy = {MultiploValidator.class })
+public @interface Multiplo {
+	
+	
+	String message() default "Multiplo Inválido";
 
 	Class<?>[] groups() default { };
 
 	Class<? extends Payload>[] payload() default { };
+	
+	int numero();
 
 }
