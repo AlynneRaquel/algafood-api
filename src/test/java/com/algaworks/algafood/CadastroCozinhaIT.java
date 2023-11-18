@@ -1,5 +1,7 @@
 package com.algaworks.algafood;
 
+import static org.mockito.Mockito.when;
+
 import org.aspectj.lang.annotation.Before;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,5 +42,18 @@ class CadastroCozinhaIT {
 		.then()
 			.body("", Matchers.hasSize(4))
 			.body("nome", Matchers.hasItems("Indiana", "Tailandesa"));
+	}
+	
+	@Test
+	public void deveRetornarStatus201_QuandoCadastrarCozinha() {
+		RestAssured.given()
+			.body("{\"nome\": \"Chinesa\" }")
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+		.when()
+			.post()
+		.then()
+			.statusCode(HttpStatus.CREATED.value());
+		
 	}
 }
