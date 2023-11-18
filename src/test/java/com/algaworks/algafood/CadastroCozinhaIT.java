@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.validation.ConstraintViolationException;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,20 @@ class CadastroCozinhaIT {
 			.get()
 		.then()
 			.statusCode(HttpStatus.OK.value());
+	}
+	
+	@Test
+	public void deveConter4Cozinhas_QuandoConsultarCozinhas() {
+		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+		
+		RestAssured.given()
+			.basePath("/cozinhas")
+			.port(8080)
+			.accept(ContentType.JSON)
+		.when()	
+			.get()
+		.then()
+			.body("", Matchers.hasSize(4))
+			.body("nome", Matchers.hasItems("Indiana", "Tailandesa"));
 	}
 }
