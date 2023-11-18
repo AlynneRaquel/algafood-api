@@ -1,11 +1,10 @@
 package com.algaworks.algafood;
 
-import static org.mockito.Mockito.when;
-
-import org.aspectj.lang.annotation.Before;
+import org.flywaydb.core.Flyway;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
@@ -15,10 +14,15 @@ import io.restassured.http.ContentType;
 @SpringBootTest
 class CadastroCozinhaIT {
 	
+	@Autowired
+	private Flyway flyway;
+	
 	@BeforeEach
 	public void setup() {
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 		RestAssured.basePath = "/cozinhas";
+		
+		flyway.migrate();
 	}
 	
 	@Test
