@@ -24,7 +24,7 @@ public class CadastroCidadeService {
 	private EstadoRepository estadoRepository;
 
 	@Autowired
-	CadastroEstadoService cadastroEstado;
+	private CadastroEstadoService cadastroEstado;
 
 	public Cidade salvar(Cidade cidade) {
 		Long estadoId = cidade.getEstado().getId();

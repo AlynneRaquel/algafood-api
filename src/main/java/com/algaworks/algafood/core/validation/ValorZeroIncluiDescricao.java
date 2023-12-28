@@ -9,8 +9,6 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import com.algaworks.algafood.api.exceptionhandler.MultiploValidator;
-
 @Target({ ElementType.TYPE }) //elementeType.TYPE especifica onde posso usar essa anotação(classe, unum) por exemp
 @Retention(RUNTIME)
 @Constraint(validatedBy = {ValorZeroIncluiDescricaoValidator.class })
