@@ -58,11 +58,12 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
+	@JsonIgnoreProperties(value = "nome", allowGetters = true) //ignora o campo nome no payload do json enviado, ignora apenas quando a chamada for pela url da restaurante
 	@Valid //Validando as propriedades de Cozinha
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class) //Convertendo grupos de constraints para validação em cascata
 	@NotNull 
-	@JsonIgnoreProperties("hibernateLazyInitializer")//@JsonIgnore
-	@ManyToOne (fetch = FetchType.LAZY)
+	//@JsonIgnoreProperties("hibernateLazyInitializer")//@JsonIgnore
+	@ManyToOne //(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 	
