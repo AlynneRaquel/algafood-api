@@ -8,7 +8,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +28,6 @@ import com.algaworks.algafood.core.validation.Groups;
 import com.algaworks.algafood.core.validation.Multiplo;
 import com.algaworks.algafood.core.validation.TaxaFrete;
 import com.algaworks.algafood.core.validation.ValorZeroIncluiDescricao;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,7 +37,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Restaurante {
+public class Restaurante { /*CLASSE MODELO P/ ESTUDOS, POR ISSO A QUANTIDADE DE COMENTÁRIOS*/
 	
 	@EqualsAndHashCode.Include
 	@Id
@@ -58,7 +55,7 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
-	@JsonIgnoreProperties(value = "nome", allowGetters = true) //ignora o campo nome no payload do json enviado, ignora apenas quando a chamada for pela url da restaurante
+	//@JsonIgnoreProperties(value = "nome", allowGetters = true) //ignora o campo nome no payload do json enviado, ignora apenas quando a chamada for pela url da restaurante
 	@Valid //Validando as propriedades de Cozinha
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class) //Convertendo grupos de constraints para validação em cascata
 	@NotNull 
@@ -67,21 +64,21 @@ public class Restaurante {
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@Embedded
 	private Endereco endereco;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@CreationTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")
 	private LocalDateTime dataCadastro;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@UpdateTimestamp
 	@Column(nullable = false)
 	private LocalDateTime dataAtualizacao;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany //(fetch = FetchType.EAGER) //Pode gerar problemas
 	@JoinTable(name = "restaurante_forma_pagamento",
 			joinColumns = @JoinColumn(name = "restaurante_id"), //usar sempre o nome da tabela que recebe o mapeamento
