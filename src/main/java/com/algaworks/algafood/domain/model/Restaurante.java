@@ -1,7 +1,7 @@
 package com.algaworks.algafood.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,12 +71,12 @@ public class Restaurante { /*CLASSE MODELO P/ ESTUDOS, POR ISSO A QUANTIDADE DE 
 	//@JsonIgnore
 	@CreationTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")
-	private LocalDateTime dataCadastro;
+	private OffsetDateTime dataCadastro;
 	
 	//@JsonIgnore
 	@UpdateTimestamp
 	@Column(nullable = false)
-	private LocalDateTime dataAtualizacao;
+	private OffsetDateTime dataAtualizacao;
 	
 	//@JsonIgnore
 	@ManyToMany //(fetch = FetchType.EAGER) //Pode gerar problemas
