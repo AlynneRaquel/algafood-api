@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,7 @@ import com.algaworks.algafood.core.validation.Groups;
 import com.algaworks.algafood.core.validation.Multiplo;
 import com.algaworks.algafood.core.validation.TaxaFrete;
 import com.algaworks.algafood.core.validation.ValorZeroIncluiDescricao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -84,5 +86,8 @@ public class Restaurante { /*CLASSE MODELO P/ ESTUDOS, POR ISSO A QUANTIDADE DE 
 			joinColumns = @JoinColumn(name = "restaurante_id"), //usar sempre o nome da tabela que recebe o mapeamento
 			inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id")) // Outra tabela do relacionamento
 	private List<FormaPagamento> formasPagamento = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "restaurante")
+	private List<Produto> produtos = new ArrayList<>();   
 	
 }

@@ -73,7 +73,8 @@ public class RestauranteController {
 	public Restaurante atualizar(@PathVariable Long restauranteId, 
 			@RequestBody @Valid Restaurante restaurante) {
 		Restaurante restauranteAtual = cadastroRestaurante.buscarOuFalhar(restauranteId);
-		BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formaPagamento", "endereço","dataCadastro");
+		BeanUtils.copyProperties(restaurante, restauranteAtual, 
+				"id", "formaPagamento", "endereço","dataCadastro", "produtos");
 
 		try {
 	        return cadastroRestaurante.salvar(restauranteAtual);
