@@ -25,7 +25,7 @@ import com.algaworks.algafood.domain.model.FormaPagamento;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class RestauranteMixin {
+public abstract class RestauranteMixin {
 	
 	@JsonIgnoreProperties(value = "nome", allowGetters = true) 
 	private Cozinha cozinha;
@@ -41,5 +41,8 @@ public class RestauranteMixin {
 	
 	@JsonIgnore
 	private List<FormaPagamento> formasPagamento = new ArrayList<>();
+	
+	//@JsonIgnore
+    //private List<Produto> produtos;
 
 }
