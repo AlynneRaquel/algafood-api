@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algafood.api.assembler.RestauranteModelAssembler;
 import com.algaworks.algafood.api.model.CozinhaModel;
 import com.algaworks.algafood.api.model.RestauranteModel;
 import com.algaworks.algafood.api.model.input.RestauranteInput;
@@ -51,18 +52,18 @@ public class RestauranteController {
 	private CadastroRestauranteService cadastroRestaurante;
 	
 	@Autowired
-	private SmartValidator validator;
+	private RestauranteModelAssembler restauranteModelAssembler;
 
 	@GetMapping
 	public List<RestauranteModel> listar(){
-		return toCollectionModel(restauranteRepository.FinAll());
+		return restauranteModelAssembler.toCollectionModel(restauranteRepository.FinAll());
 	}
 
 	@GetMapping("/{restauranteId}")
 	public RestauranteModel buscar(@PathVariable Long restauranteId){
 		Restaurante restaurante = cadastroRestaurante.buscarOuFalhar(restauranteId);
 		
-		return toModel(restaurante);
+		return restauranteModelAssembler.toModel(restaurante);
 	}
 
 
@@ -73,7 +74,7 @@ public class RestauranteController {
 		 try {
 			 	Restaurante restaurante = toDomainObject(restauranteInput); //converte para domain, domain só recebe domain
 			 	
-		        return toModel(cadastroRestaurante.salvar(restaurante)); // retorna convertendo novamente para dto
+		        return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restaurante)); // retorna convertendo novamente para dto
 		    } catch (EntidadeNaoEncontradaException e) {
 		        throw new NegocioException(e.getMessage());
 		    }
@@ -90,7 +91,7 @@ public class RestauranteController {
 			BeanUtils.copyProperties(restaurante, restauranteAtual, 
 					"id", "formaPagamento", "endereço","dataCadastro", "produtos");
 			
-	        return toModel(cadastroRestaurante.salvar(restauranteAtual));
+	        return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restauranteAtual));
 	    } catch (EntidadeNaoEncontradaException e) {
 	        throw new NegocioException(e.getMessage());
 	    }
@@ -142,26 +143,7 @@ public class RestauranteController {
 //			throw new HttpMessageNotReadableException(e.getMessage(), rootCause, serverHttpRequest);
 //		}
 //	}
-	
-	private RestauranteModel toModel(Restaurante restaurante) {
-		CozinhaModel cozinhaModel = new CozinhaModel();
-		cozinhaModel.setId(restaurante.getCozinha().getId());
-		cozinhaModel.setNome(restaurante.getCozinha().getNome());
-		
-		RestauranteModel restauranteModel = new RestauranteModel();
-		restauranteModel.setId(restaurante.getId());
-		restauranteModel.setNome(restaurante.getNome());
-		restauranteModel.setTaxaFrete(restaurante.getTaxaFrete());
-		restauranteModel.setCozinha(cozinhaModel);
-		return restauranteModel;
-	}
-	
-	private List<RestauranteModel> toCollectionModel(List<Restaurante> restaurantes){
-		return restaurantes.stream()
-				.map(restaurante -> toModel(restaurante))
-				.collect(Collectors.toList());
-	}
-	
+
 	private Restaurante toDomainObject(RestauranteInput restautanteInput) {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setNome(restautanteInput.getNome());
