@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
@@ -46,21 +47,21 @@ public class Restaurante { /*CLASSE MODELO P/ ESTUDOS, POR ISSO A QUANTIDADE DE 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
+	//@NotBlank comentado porque foi colocado no RestauranteInput a validação de entrada
 	@Column(nullable = false) // NULLABLE é detalhe da tabela do banco , não influencia no beanValidation
 	private String nome;
 	
-	@NotNull
-//	@PositiveOrZero(message = "{TaxaFrete.invalida}")// mensagem especifica do ValidationMessages 
-	@TaxaFrete //anotação criada 
-	@Multiplo(numero = 5)
+	//@NotNull
+	//@PositiveOrZero(message = "{TaxaFrete.invalida}")// mensagem especifica do ValidationMessages 
+	//@TaxaFrete //anotação criada 
+	//@Multiplo(numero = 5)
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
 	//@JsonIgnoreProperties(value = "nome", allowGetters = true) //ignora o campo nome no payload do json enviado, ignora apenas quando a chamada for pela url da restaurante
-	@Valid //Validando as propriedades de Cozinha
-	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class) //Convertendo grupos de constraints para validação em cascata
-	@NotNull 
+	//@Valid //Validando as propriedades de Cozinha
+	//@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class) //Convertendo grupos de constraints para validação em cascata
+	//@NotNull 
 	//@JsonIgnoreProperties("hibernateLazyInitializer")//@JsonIgnore
 	@ManyToOne //(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
