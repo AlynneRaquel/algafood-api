@@ -28,7 +28,10 @@ public class CadastroCozinhaService {
 	public void excluir(Long cozinhaId) {
 		try {
 			cozinhaRepository.deleteById(cozinhaId);
-		
+			
+			//descarrega o que tem na fila do JPA e força a continuação da transação
+			cozinhaRepository.flush(); 
+			
 		} catch (EmptyResultDataAccessException e) {
 			throw new CozinhaNaoEncontradaException(cozinhaId);
 		
