@@ -19,7 +19,7 @@ public class RestauranteInputDisassembler {
 	}
 	
 	public void copyToDomainObject(RestauranteInput restauranteInput, Restaurante restaurante) {
-		 //para o JPA mapear uma nova instância de cozinha. 
+		//para o JPA mapear uma nova instância de cozinha. 
 		//para evitar: identifier of an instance of com.algaworks.algafood.domain.model.Cozinha was altered from 2 to 1
 		restaurante.setCozinha(new Cozinha());
 		
