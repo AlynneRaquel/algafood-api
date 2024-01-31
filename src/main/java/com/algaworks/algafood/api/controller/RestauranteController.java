@@ -39,8 +39,8 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteModelAssembler restauranteModelAssembler;
 	
-//	@Autowired
-//	private RestauranteInputDisassembler restauranteInputDisassembler;
+	@Autowired
+	private RestauranteInputDisassembler restauranteInputDisassembler;
 
 	@GetMapping
 	public List<RestauranteModel> listar(){
