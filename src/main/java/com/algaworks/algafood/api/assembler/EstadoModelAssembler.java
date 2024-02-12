@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 import com.algaworks.algafood.api.model.EstadoModel;
 import com.algaworks.algafood.domain.model.Estado;
 
-
-
 @Component
 public class EstadoModelAssembler {
 	

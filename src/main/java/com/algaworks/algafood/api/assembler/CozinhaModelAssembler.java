@@ -2,7 +2,6 @@ package com.algaworks.algafood.api.assembler;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
