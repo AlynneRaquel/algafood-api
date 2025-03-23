@@ -33,7 +33,7 @@ public class CozinhaController {
 	
 	@GetMapping
 	public List<CozinhaModel> listar(){
-		log.info("Consultando cozinhas");
+		log.info("Consultando cozinhas ");
 
 		if (true){
 			throw new RuntimeException("Teste de Exception");
